@@ -1,0 +1,24 @@
+.a,.container{
+    background-color: #1A1A1C;
+}
+.image{
+   
+    /* mix-blend-mode:multiply; */
+    background-color: #1A1A1C;
+}
+img{
+    width: 30%;
+    color: #1A1A1C;
+}
+div{
+    align-items: center;
+}
+span{
+    background-color: #1A1A1C;
+}
+.price{
+    color:green;
+}
+.price1{
+    color:red;
+}
