@@ -5,8 +5,6 @@ const perBtn = document.querySelector(".perBtn")
 let arr = []
 let sort_arr = []
 let sort_arr1 = []
-let sort_mktCap = sort_arr.sort((a,b)=>(a-b))
-let sort_perCap = sort_arr1.sort((a,b)=>(a-b))
 async function fetchData(){
  const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false")
  const data = await res.json()
@@ -16,6 +14,7 @@ async function fetchData(){
   sort_arr1.push(ele.price_change_percentage_24h)
  })
  getData(data)
+ let sort_mktCap = sort_arr.sort((a,b)=>(a-b))
  mktBtn.addEventListener("click",()=>{
     sort_mktCap = sort_mktCap.reverse()
     let arr2 = []
@@ -28,8 +27,11 @@ async function fetchData(){
     })
     getData(arr2)
  })
+ let sort_perCap = sort_arr1.sort((a,b)=>(a-b))
+//  console.log(sort_perCap)
  perBtn.addEventListener("click",()=>{
     sort_perCap = sort_perCap.reverse()
+    // console.log(sort_perCap)
     let arr2 = []
      sort_perCap.filter((ele)=>{
      for(let i=0; i<=arr.length-1; i++){
@@ -45,12 +47,12 @@ fetchData()
 function getData(data){
     let collection=""
     data.forEach((ele)=>{
-      collection+= `<div class="row text-white fs-5 border-bottom" >
-         <div class="col-2 py-4"><img src=${ele.image}/> ${ele.name}</div>
-         <div class="col-1 py-4 text-start">${ele.symbol.toUpperCase()}</div>
-         <div class="col-2 py-4 text-end">$${ele.current_price}</div>
-         <div class="col-3 py-4 text-end">$${marketCap(ele.total_volume)}</div>
-         <div class="priceDiv">${priceChange(ele.price_change_percentage_24h)}%</div>
+      collection+= `<div class="row text-white fs fs border-bottom" >
+         <div class="col-2  py-4 text"><img src=${ele.image}/> ${ele.name}</div>
+         <div class="col-1 py-4  text-start">${ele.symbol.toUpperCase()}</div>
+         <div class="col-2 py-4  text-end">$${ele.current_price}</div>
+         <div class="col-3 py-4  text-end">$${marketCap(ele.total_volume)}</div>
+         <div class="col-1 priceDiv">${priceChange(ele.price_change_percentage_24h)}%</div>
          <div class="col-3 py-4 text-end">Mkt Cap:- $${marketCap(ele.market_cap)}</div>
       </div>`
     function marketCap(num){ 
